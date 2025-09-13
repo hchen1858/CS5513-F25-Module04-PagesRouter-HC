@@ -6,10 +6,21 @@ import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 // Import CSS module styles for utility classes used in this component
 import utilStyles from '../styles/utils.module.css';
+
+import { getSortedPostsData } from '../lib/posts';
+ 
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
  
 // Main Home component that serves as the landing page for the Next.js blog application.
 // This function renders the homepage with a welcome message, site title, and navigation link to the first blog post.
-export default function Home() {
+export default function Home({allPostsData}) {
   return (
     // Return the JSX structure for the homepage
     <Layout home>
@@ -27,6 +38,22 @@ export default function Home() {
           (This is a sample website - you'll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+      </section>
+
+       {/* Add this <section> tag below the existing <section> tag */}
+       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Create a heading with a link to the first blog post */}
