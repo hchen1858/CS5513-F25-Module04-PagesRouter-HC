@@ -8,6 +8,8 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 
 import { getSortedPostsData } from '../lib/posts';
+import Date from '../components/date';
+
  
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -46,21 +48,15 @@ export default function Home({allPostsData}) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
-            </li>
+            <Link href={`/posts/${id}`}>{title}</Link>
+            <br />
+            <small className={utilStyles.lightText}>
+              <Date dateString={date} />
+            </small>
+          </li>            
           ))}
         </ul>
-      </section>
-
-      {/* Create a heading with a link to the first blog post */}
-      <h1>
-          {/* Display text with a Next.js Link component for client-side navigation to the first blog post */}
-          Read <Link href="/posts/first-post">this page!</Link>
-      </h1>
+      </section>      
 
       {/* Closing Layout component */}
     </Layout>
