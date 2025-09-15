@@ -50,3 +50,18 @@
   .lightText {
     color: #666;
   }
+
+  .dateTextPost {
+    color:darkred;
+    font-weight: bold;
+  }
+
+  .blogSection {
+    background-color:blanchedalmond;
+    text-align: center;
+  }
+
+  .blogArticle {
+    background-color:beige;
+    padding: 2rem;
+  }

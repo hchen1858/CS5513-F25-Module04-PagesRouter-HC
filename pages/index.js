@@ -37,14 +37,15 @@ export default function Home({allPostsData}) {
         <p>Hello, I'm Helen the British Blue cat. I'm just starting to learn the uses of Next.js</p>
         {/* Display a sample website notice with a link to the Next.js tutorial */}
         <p>
-          (This is a sample website - you'll be building a site like this on{' '}
+          (This is a sample website - that I'm building on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+        <p>Pretty good for a cat's first effort at a blog, huh?!!</p>
       </section>
 
        {/* Add this <section> tag below the existing <section> tag */}
-       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.blogSection}`}>
+        <h2 className={utilStyles.headingLg}>A British Blue Cat's Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
