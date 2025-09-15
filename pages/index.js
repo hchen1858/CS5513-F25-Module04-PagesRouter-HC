@@ -7,15 +7,21 @@ import Layout, { siteTitle } from '../components/layout';
 // Import CSS module styles for utility classes used in this component
 import utilStyles from '../styles/utils.module.css';
 
+// Import the getSortedPostsData function from the posts library to fetch and sort blog post data
 import { getSortedPostsData } from '../lib/posts';
+// Import the Date component to format and display publication dates for blog posts
 import Date from '../components/date';
 
  
+// getStaticProps is a Next.js function that runs at build time to pre-render pages with data
+// This function fetches data before the page is rendered, enabling static site generation (SSG)
 export async function getStaticProps() {
+  // Fetch and sort all blog post data from the markdown files in the posts directory
   const allPostsData = getSortedPostsData();
+  // Return the data as props that will be passed to the Home component
   return {
     props: {
-      allPostsData,
+      allPostsData, // Pass the sorted posts data to the component
     },
   };
 }
@@ -40,17 +46,24 @@ export default function Home({allPostsData}) {
           (This is a sample website - that I'm building on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+        {/* Display a playful comment from the cat character expressing pride in their blog creation */}
         <p>Pretty good for a cat's first effort at a blog, huh?!!</p>
       </section>
 
-       {/* Add this <section> tag below the existing <section> tag */}
+       {/* Blog section that displays a list of all available blog posts */}
        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.blogSection}`}>
+        {/* Section heading for the blog posts list */}
         <h2 className={utilStyles.headingLg}>A British Blue Cat's Blog</h2>
+        {/* Unordered list container for all blog post entries */}
         <ul className={utilStyles.list}>
+          {/* Map through each blog post in allPostsData to create individual list items */}
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
+            {/* Create a clickable link to the individual blog post page using Next.js Link component */}
             <Link href={`/posts/${id}`}>{title}</Link>
+            {/* Line break to separate the title from the date */}
             <br />
+            {/* Display the publication date in smaller, lighter text using the Date component */}
             <small className={utilStyles.lightText}>
               <Date dateString={date} />
             </small>
